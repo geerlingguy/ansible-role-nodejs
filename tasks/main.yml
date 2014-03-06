@@ -1,0 +1,7 @@
+---
+- name: Ensure Node.js and npm are installed.
+  yum: pkg=npm state=present enablerepo=epel
+
+- name: "Node: Install forever (to run our Node.js app)."
+  npm: name=forever global=yes state=latest
+  when: nodejs_forever
