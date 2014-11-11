@@ -1,6 +1,6 @@
 # Ansible Role: Node.js
 
-Installs Node.js on RHEL/CentOS 6.x.
+Installs Node.js on RHEL/CentOS.
 
 ## Requirements
 
