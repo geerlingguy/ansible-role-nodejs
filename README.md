@@ -1,10 +1,10 @@
 # Ansible Role: Node.js
 
-Installs Node.js on RHEL/CentOS.
+Installs Node.js on RHEL/CentOS or Debian/Ubuntu.
 
 ## Requirements
 
-None.
+Requires the EPEL repository on RedHat/CentOS (you can install it by simply adding the `geerlingguy.repo-epel` role to your playbook).
 
 ## Role Variables
 
@@ -16,7 +16,7 @@ Whether to install Forever, a simple process manager for Node.js. With forever i
 
 ## Dependencies
 
-  - geerlingguy.repo-epel
+None.
 
 ## Example Playbook
 
