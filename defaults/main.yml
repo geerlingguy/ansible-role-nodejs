@@ -1,2 +1,10 @@
 ---
 nodejs_forever: true
+
+# Define a list of global packages to be installed with NPM.
+nodejs_npm_global_packages: []
+#  # Install a specific version of a package.
+#  - name: jslint
+#    version: 0.9.3
+#  # Install the latest stable release of a package.
+#  - name: node-sass

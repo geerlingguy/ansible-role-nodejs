@@ -5,6 +5,14 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: "Node: Install forever (to run Node.js apps)."
+- name: Install forever (to run Node.js apps).
   npm: name=forever global=yes state=latest
   when: nodejs_forever
+
+- name: Install additional defined npm global packages.
+  npm:
+    name: "{{ item.name }}"
+    version: "{{ item.version | default('') }}"
+    global: yes
+    state: latest
+  with_items: nodejs_npm_global_packages

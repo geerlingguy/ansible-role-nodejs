@@ -10,11 +10,22 @@ Requires the EPEL repository on RedHat/CentOS (you can install it by simply addi
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see `vars/main.yml`):
+Available variables are listed below, along with default values (see `defaults/main.yml`):
 
     nodejs_forever: true
 
 Whether to install Forever, a simple process manager for Node.js. With forever installed, you can start a Node.js app with the command `forever start /path/to/app.js`, and manage the app via `forever` much the same as you would manage other services on your server with `service`.
+
+    nodejs_npm_global_packages: []
+
+Add a list of npm packages with a `name` and (optional) `version` to be installed globally. For example:
+
+    nodejs_npm_global_packages:
+      # Install a specific version of a package.
+      - name: jslint
+        version: 0.9.3
+      # Install the latest stable release of a package.
+      - name: node-sass
 
 ## Dependencies
 
@@ -26,11 +37,14 @@ None.
       vars_files:
         - vars/main.yml
       roles:
-        - { role: geerlingguy.nodejs }
+        - geerlingguy.nodejs
 
 *Inside `vars/main.yml`*:
 
     nodejs_forever: true
+    nodejs_npm_global_packages:
+      - name: jslint
+      - name: node-sass
 
 ## License
 
