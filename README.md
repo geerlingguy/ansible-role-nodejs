@@ -14,7 +14,7 @@ Available variables are listed below, along with default values (see `defaults/m
 
     nodejs_version: "0.10"
 
-The Node.js version to install. "0.10" is the default and works on all supported OSes. "0.12" is only supported on Debian/Ubuntu for now (see [this issue in the Nodesource repository](https://github.com/nodesource/distributions/issues/73)).
+The Node.js version to install. "0.10" is the default and works on all supported OSes. "0.12" and "4.x" are supported on the latest Debian/Ubuntu systems, and somewhat on RHEL/CentOS 7, but are not as stable on n-1 OS releases.
 
     nodejs_forever: true
 

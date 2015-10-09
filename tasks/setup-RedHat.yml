@@ -1,7 +1,7 @@
 ---
 - name: Make sure nodejs_version is set correctly.
   assert:
-    that: nodejs_version == "0.10"
+    that: nodejs_version in [ "0.10", "0.12", "4.x" ]
 
 - name: Add Nodesource repositories for Node.js.
   yum:
