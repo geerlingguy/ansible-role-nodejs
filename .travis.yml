@@ -1,4 +1,5 @@
 ---
+sudo: required
 language: python
 python: "2.7"
 
@@ -35,3 +36,6 @@ script:
     which node
     && (echo 'Node.js is installed' && exit 0)
     || (echo 'Node.js is not installed' && exit 1)
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
