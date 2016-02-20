@@ -8,5 +8,18 @@
       - name: jslint
         version: 0.9.6
 
+  pre_tasks:
+    - name: Ensure build dependencies are installed (RedHat).
+      yum: 'name="{{ item }}" state=present'
+      with_items:
+        - which
+      when: ansible_os_family == 'RedHat'
+
+    - name: Ensure build dependencies are installed (Debian).
+      apt: 'name="{{ item }}" state=installed'
+      with_items:
+        - apt-transport-https
+      when: ansible_os_family == 'Debian'
+
   roles:
     - role_under_test
