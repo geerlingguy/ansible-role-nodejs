@@ -1,5 +1,12 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: all
+
+  vars:
+    version: "0.12"
+    nodejs_npm_global_packages:
+      - name: node-sass
+      - name: jslint
+        version: 0.9.6
+
   roles:
-    - ansible-role-nodejs
+    - role_under_test
