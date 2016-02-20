@@ -2,7 +2,7 @@
 - hosts: all
 
   vars:
-    nodejs_version: "4.x"
+    nodejs_version: "5.x"
     nodejs_npm_global_packages:
       - name: node-sass
       - name: jslint

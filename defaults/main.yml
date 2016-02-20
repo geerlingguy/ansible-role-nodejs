@@ -1,6 +1,7 @@
 ---
 # Set the version of Node.js to install (e.g. "0.10", "0.12", "4.x", "5.x").
-nodejs_version: "0.10"
+# Version numbers from Nodesource: https://github.com/nodesource/distributions
+nodejs_version: "0.12"
 
 # Install forever, which is useful for running Node.js apps.
 nodejs_forever: true
