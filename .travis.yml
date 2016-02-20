@@ -50,8 +50,10 @@ script:
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm which node'
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm node -v'
 
-  # TODO: Ensure npm packages are installed globally.
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm npm list -g --depth=0'
+  # Ensure npm packages are installed globally.
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm npm list -g --depth=0 forever'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm npm list -g --depth=0 jslint'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm npm list -g --depth=0 node-sass'
 
   # Clean up
   - 'sudo docker stop "$(cat ${container_id})"'
