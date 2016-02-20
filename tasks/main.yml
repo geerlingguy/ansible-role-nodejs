@@ -5,11 +5,27 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Install forever (to run Node.js apps).
+# TODO: Remove this task after Ansible 2.x npm module bug is fixed. See:
+# https://github.com/ansible/ansible-modules-extras/issues/1375
+- name: Ensure forever is installed (to run Node.js apps).
+  npm: name=forever global=yes state=present
+  when: nodejs_forever
+
+- name: Ensure forever is at the latest release.
   npm: name=forever global=yes state=latest
   when: nodejs_forever
 
-- name: Install additional defined npm global packages.
+# TODO: Remove this task after Ansible 2.x npm module bug is fixed. See:
+# https://github.com/ansible/ansible-modules-extras/issues/1375
+- name: Ensure npm global packages are installed.
+  npm:
+    name: "{{ item.name }}"
+    version: "{{ item.version | default('') }}"
+    global: yes
+    state: present
+  with_items: nodejs_npm_global_packages
+
+- name: Ensure npm global packages are at the latest release.
   npm:
     name: "{{ item.name }}"
     version: "{{ item.version | default('') }}"
