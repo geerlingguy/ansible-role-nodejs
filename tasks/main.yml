@@ -33,8 +33,8 @@
     version: "{{ item.version | default('') }}"
     global: yes
     state: present
-    become: yes
-    become_user: "{{ nodejs_install_npm_user }}"
+  become: yes
+  become_user: "{{ nodejs_install_npm_user }}"
   when: nodejs_forever
   with_items: "{{ nodejs_npm_global_packages }}"
 
