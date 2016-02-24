@@ -8,6 +8,7 @@
       - name: node-sass
       - name: jslint
         version: 0.9.6
+      - name: yo
 
   pre_tasks:
     - name: Ensure build dependencies are installed (RedHat).
