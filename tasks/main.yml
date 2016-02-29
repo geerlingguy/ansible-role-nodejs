@@ -23,7 +23,7 @@
     version: "{{ item.version | default('') }}"
     global: yes
     state: present
-  with_items: nodejs_npm_global_packages
+  with_items: "{{ nodejs_npm_global_packages }}"
 
 - name: Ensure npm global packages are at the latest release.
   npm:
@@ -31,4 +31,4 @@
     version: "{{ item.version | default('') }}"
     global: yes
     state: latest
-  with_items: nodejs_npm_global_packages
+  with_items: "{{ nodejs_npm_global_packages }}"
