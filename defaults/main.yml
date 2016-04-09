@@ -3,9 +3,8 @@
 # Version numbers from Nodesource: https://github.com/nodesource/distributions
 nodejs_version: "0.12"
 
+# The user for whom the npm packages will be installed.
 # nodejs_install_npm_user: username
-
-
 
 # Install forever, which is useful for running Node.js apps.
 nodejs_forever: true
