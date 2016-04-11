@@ -5,14 +5,23 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
+- name: Define nodejs_install_npm_user
+  set_fact:
+    nodejs_install_npm_user: "{{ ansible_ssh_user }}"
+  when: nodejs_install_npm_user is not defined
+
 # TODO: Remove this task after Ansible 2.x npm module bug is fixed. See:
 # https://github.com/ansible/ansible-modules-extras/issues/1375
 - name: Ensure forever is installed (to run Node.js apps).
   npm: name=forever global=yes state=present
+  become: yes
+  become_user: "{{ nodejs_install_npm_user }}"
   when: nodejs_forever
 
 - name: Ensure forever is at the latest release.
   npm: name=forever global=yes state=latest
+  become: yes
+  become_user: "{{ nodejs_install_npm_user }}"
   when: nodejs_forever
 
 # TODO: Remove this task after Ansible 2.x npm module bug is fixed. See:
@@ -23,6 +32,8 @@
     version: "{{ item.version | default('') }}"
     global: yes
     state: present
+  become: yes
+  become_user: "{{ nodejs_install_npm_user }}"
   with_items: "{{ nodejs_npm_global_packages }}"
 
 - name: Ensure npm global packages are at the latest release.
@@ -31,4 +42,6 @@
     version: "{{ item.version | default('') }}"
     global: yes
     state: latest
+  become: yes
+  become_user: "{{ nodejs_install_npm_user }}"
   with_items: "{{ nodejs_npm_global_packages }}"
