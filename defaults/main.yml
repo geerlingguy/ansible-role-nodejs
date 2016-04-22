@@ -6,9 +6,6 @@ nodejs_version: "0.12"
 # The user for whom the npm packages will be installed.
 # nodejs_install_npm_user: username
 
-# Install forever, which is useful for running Node.js apps.
-nodejs_forever: true
-
 # Define a list of global packages to be installed with NPM.
 nodejs_npm_global_packages: []
 #  # Install a specific version of a package.

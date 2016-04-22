@@ -21,6 +21,7 @@ galaxy_info:
       - raring
       - saucy
       - trusty
+      - xenial
   galaxy_tags:
     - development
     - web
