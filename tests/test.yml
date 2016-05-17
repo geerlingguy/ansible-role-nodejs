@@ -20,7 +20,6 @@
     - name: Ensure build dependencies are installed (Debian).
       apt: 'name="{{ item }}" state=installed'
       with_items:
-        - apt-transport-https
         - sudo
       when: ansible_os_family == 'Debian'
 
