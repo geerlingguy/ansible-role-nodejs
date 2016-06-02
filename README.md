@@ -18,7 +18,15 @@ The Node.js version to install. "0.10" is the default and works on all supported
 
     nodejs_install_npm_user: "{{ ansible_ssh_user }}"
 
-The user for whom the npm packages will be installed can be set here, this defaults to ansible_ssh_user
+The user for whom the npm packages will be installed can be set here, this defaults to ansible_user
+
+    npm_config_prefix: "~/.npm-global"
+
+The global installation directory. This should be writeable by the nodejs_install_npm_user.
+
+    npm_config_unsafe_perm: "false"
+
+Set to true to suppress the UID/GID switching when running package scripts. If set explicitly to false, then installing as a non-root user will fail.
 
     nodejs_npm_global_packages: []
 
