@@ -12,9 +12,9 @@ Requires the EPEL repository on RedHat/CentOS (you can install it by simply addi
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    nodejs_version: "0.10"
+    nodejs_version: "0.12"
 
-The Node.js version to install. "0.10" is the default and works on all supported OSes. Other versions such as "0.12", "4.x", and "5.x" should work on the latest versions of Debian/Ubuntu and RHEL/CentOS, but may be less stable on older operating systems (like CentOS 6).
+The Node.js version to install. "0.12" is the default and works on all supported OSes. Other versions such as "0.10", "4.x", "5.x", and "6.x" should work on the latest versions of Debian/Ubuntu and RHEL/CentOS.
 
     nodejs_install_npm_user: "{{ ansible_ssh_user }}"
 
