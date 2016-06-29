@@ -1,0 +1,15 @@
+[nodesource]
+name=Node.js Packages for Enterprise Linux {{ ansible_distribution_major_version }} - $basearch
+baseurl=https://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_distribution_major_version }}/$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL
+
+[nodesource-source]
+name=Node.js for Enterprise Linux {{ ansible_distribution_major_version }} - $basearch - Source
+baseurl=https://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_distribution_major_version }}/SRPMS
+failovermethod=priority
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL
+gpgcheck=1
