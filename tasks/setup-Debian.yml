@@ -3,9 +3,7 @@
   apt: name=apt-transport-https state=present
 
 - name: Add Nodesource apt key.
-  apt_key:
-    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-    state: present
+  command: "apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 68576280"
 
 - name: Add NodeSource repositories for Node.js.
   apt_repository:
