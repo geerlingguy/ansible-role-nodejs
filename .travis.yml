@@ -2,20 +2,24 @@
 sudo: required
 
 env:
-  matrix:
-    - distro: centos7
-      init: /usr/lib/systemd/systemd
-      run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
-    - distro: ubuntu1604
-      init: /lib/systemd/systemd
-      run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
-    - distro: ubuntu1404
-      init: /sbin/init
-      run_opts: ""
-    - distro: ubuntu1204
-      init: /sbin/init
-      run_opts: ""
-    allow_failures:
+  - distro: centos7
+    init: /usr/lib/systemd/systemd
+    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - distro: centos6
+    init: /sbin/init
+    run_opts: ""
+  - distro: ubuntu1604
+    init: /lib/systemd/systemd
+    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - distro: ubuntu1404
+    init: /sbin/init
+    run_opts: ""
+  - distro: ubuntu1204
+    init: /sbin/init
+    run_opts: ""
+matrix:
+  allow_failures:
+    env:
       - distro: centos6
         init: /sbin/init
         run_opts: ""
