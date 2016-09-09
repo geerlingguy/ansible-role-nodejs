@@ -19,10 +19,7 @@ env:
     run_opts: ""
 matrix:
   allow_failures:
-    env:
-      - distro: centos6
-        init: /sbin/init
-        run_opts: ""
+    env: distro=centos6 init=/sbin/init run_opts=""
 
 services:
   - docker
