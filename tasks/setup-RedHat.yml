@@ -10,7 +10,9 @@
   when: nodejs_version == '0.10'
 
 - name: import nodesource (nodejs) rpm key
-  rpm_key: state=present key=https://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL
+  rpm_key:
+    key: https://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL
+    state: present
 
 - name: Add Nodesource repositories for Node.js.
   yum:
