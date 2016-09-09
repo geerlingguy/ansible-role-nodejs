@@ -10,11 +10,16 @@
     nodejs_install_npm_user: "{{ ansible_user }}"
   when: nodejs_install_npm_user is not defined
 
+- name: get user facts for nodejs_install_npm_user
+  user:
+    name: "{{ nodejs_install_npm_user }}"
+  register: nodejs_install_npm_user_facts
+
 - name: Create npm global directory
   file:
     path: "{{ npm_config_prefix }}"
     owner: "{{ nodejs_install_npm_user }}"
-    group: "{{ nodejs_install_npm_user }}"
+    group: "{{ nodejs_install_npm_user_facts.group }}"
     state: directory
 
 - name: Add npm_config_prefix bin directory to global $PATH.
