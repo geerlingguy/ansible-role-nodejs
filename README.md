@@ -20,6 +20,10 @@ The Node.js version to install. "0.12" is the default and works on all supported
 
 The user for whom the npm packages will be installed can be set here, this defaults to ansible_user
 
+    nodejs_install_npm_group: "{{ nodejs_install_npm_user }}"
+
+The group for whom the npm packages will be installed can be set here, this defaults to nodejs_install_npm_user
+
     npm_config_prefix: "~/.npm-global"
 
 The global installation directory. This should be writeable by the nodejs_install_npm_user.
