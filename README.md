@@ -38,6 +38,11 @@ Add a list of npm packages with a `name` and (optional) `version` to be installe
         version: 0.9.3
       # Install the latest stable release of a package.
       - name: node-sass
+<!-- code block separator -->
+
+    nodejs_package_json_path: "/var/www/application/package.json"
+
+Set a path pointing to a package.json. This will install all of the packages globally.
 
 ## Dependencies
 
