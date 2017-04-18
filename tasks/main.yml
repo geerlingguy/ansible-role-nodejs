@@ -48,3 +48,8 @@
     NODE_PATH: "{{ npm_config_prefix }}/lib/node_modules"
     NPM_CONFIG_UNSAFE_PERM: "{{ npm_config_unsafe_perm }}"
   with_items: "{{ nodejs_npm_global_packages }}"
+
+- name: Install package.json
+  npm:
+    path: "{{ package_json_path }}"
+  when: nodejs_package_json_path is defined and nodejs_package_json_path
