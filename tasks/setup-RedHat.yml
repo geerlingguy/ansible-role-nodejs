@@ -1,4 +1,7 @@
 ---
+- set_fact: ansible_distribution_major_version=6
+  when: ansible_distribution == 'Amazon' and ansible_distribution_major_version == 'NA'
+
 - name: Set up the Nodesource RPM directory for Node.js > 0.10.
   set_fact:
     nodejs_rhel_rpm_dir: "pub_{{ nodejs_version }}"
