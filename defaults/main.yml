@@ -5,6 +5,7 @@ nodejs_version: "6.x"
 
 # The user for whom the npm packages will be installed.
 # nodejs_install_npm_user: username
+# nodejs_install_npm_group: groupname
 
 # The directory for global installations.
 npm_config_prefix: "/usr/local/lib/npm"

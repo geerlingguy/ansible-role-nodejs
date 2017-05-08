@@ -10,11 +10,16 @@
     nodejs_install_npm_user: "{{ ansible_user | default(lookup('env', 'USER')) }}"
   when: nodejs_install_npm_user is not defined
 
+- name: Define nodejs_install_npm_group
+  set_fact:
+    nodejs_install_npm_group: "{{ nodejs_install_npm_user }}"
+  when: nodejs_install_npm_group is not defined
+
 - name: Create npm global directory
   file:
     path: "{{ npm_config_prefix }}"
     owner: "{{ nodejs_install_npm_user }}"
-    group: "{{ nodejs_install_npm_user }}"
+    group: "{{ nodejs_install_npm_group }}"
     state: directory
 
 - name: Add npm_config_prefix bin directory to global $PATH.
