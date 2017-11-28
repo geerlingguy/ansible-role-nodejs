@@ -5,6 +5,13 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
+- name: Define nodejs_install_npm_user as ansible_user_id
+  set_fact:
+    nodejs_install_npm_user: "{{ ansible_user_id }}"
+  when:
+    - nodejs_install_npm_user is not defined
+    - ansible_user_id is defined
+
 - name: Define nodejs_install_npm_user
   set_fact:
     nodejs_install_npm_user: "{{ ansible_user | default(lookup('env', 'USER')) }}"
