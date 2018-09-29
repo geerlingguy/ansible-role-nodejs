@@ -27,7 +27,7 @@
   npm:
     name: "{{ item.name | default(item) }}"
     version: "{{ item.version | default('latest') }}"
-    global: yes
+    global: true
     state: latest
   environment:
     NPM_CONFIG_PREFIX: "{{ npm_config_prefix }}"
