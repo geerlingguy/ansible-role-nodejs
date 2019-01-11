@@ -2,10 +2,16 @@
 - name: Ensure apt-transport-https is installed.
   apt: name=apt-transport-https state=present
 
+# Install dirmngr (required by apt-key).
+- name: Install certificate management service.
+  apt:
+    name: dirmngr
+    state: present
+
 - name: Add Nodesource apt key.
   apt_key:
-    url: https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
-    id: "68576280"
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    id: 9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280
     state: present
 
 - name: Add NodeSource repositories for Node.js.
