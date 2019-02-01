@@ -7,7 +7,9 @@
     url: https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
     id: "68576280"
     state: present
-
+  retries: 5
+  delay: 5
+  
 - name: Add NodeSource repositories for Node.js.
   apt_repository:
     repo: "{{ item }}"
