@@ -25,3 +25,6 @@ nodejs_npm_global_packages: []
 
 # The path of a package.json file used to install packages globally.
 nodejs_package_json_path: ""
+
+# optionally lock the version to prevent unintentional upgrades
+nodejs_versionlock: False
