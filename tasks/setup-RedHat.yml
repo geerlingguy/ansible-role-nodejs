@@ -1,7 +1,7 @@
 ---
 - name: Set up the Nodesource RPM directory for Node.js > 0.10.
   set_fact:
-    nodejs_rhel_rpm_dir: "pub_{{ nodejs_version }}"
+    nodejs_rhel_rpm_dir: "pub_{{ nodejs_version|regex_replace('\\.\\d+$','.x') }}"
   when: nodejs_version != '0.10'
 
 - name: Set up the Nodesource RPM variable for Node.js == 0.10.
@@ -33,5 +33,20 @@
     state: present
   when: ansible_distribution_major_version|int >= 7
 
+- block:
+  - name: Versionlock plugin is present
+    yum:
+      name: yum-plugin-versionlock
+      state: present
+
+  - name: lock the version of nodejs
+    shell:  yum versionlock add nodejs-{{ nodejs_version }}.* ;
+    register: versionlock
+    changed_when: "'versionlock added: 0' not in versionlock.stdout"
+  when: nodejs_versionlock
+
 - name: Ensure Node.js and npm are installed.
-  yum: "name=nodejs-{{ nodejs_version|regex_replace('x', '') }}* state=present enablerepo='nodesource'"
+  yum:
+    name: nodejs-{{ nodejs_version|regex_replace('\\.[^\\.]+$', '.') }}* 
+    state: present 
+    enablerepo: nodesource
