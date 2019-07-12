@@ -30,17 +30,17 @@
     state: present
     register: node_installed
   when:
-    - not nodejs_deb_url_prefix
+    - not nodejs_pkg_install
 
 - name: Download deb (if choosing a specific version)
   get_url:
-    url: "https://{{ nodejs_deb_url_prefix }}/nodejs_{{ nodejs_version }}-1nodesource1_amd64.deb"
+    url: "{{ nodejs_deb_url_prefix }}/nodejs_{{ nodejs_version }}-1nodesource1_amd64.deb"
     dest: "/opt/nodejs.deb"
   when:
-    - nodejs_deb_url_prefix
+    - nodejs_pkg_install | bool
 
 - name: Install from deb (if choosing a specific version)
   apt:
     deb: "/opt/nodejs.deb"
   when:
-    - nodejs_deb_url_prefix
+    - nodejs_pkg_install | bool
