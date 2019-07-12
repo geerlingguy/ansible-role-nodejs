@@ -28,6 +28,7 @@
   apt:
     name: "nodejs={{ nodejs_version|regex_replace('x', '') }}*"
     state: present
+    register: node_installed
   when:
     - not nodejs_deb_url_prefix
 
@@ -36,10 +37,10 @@
     url: "{{ nodejs_deb_url_prefix }}/nodejs_{{ nodejs_version }}-1nodesource1_amd64.deb"
     dest: "/opt/nodejs.deb"
   when:
-    - not nodejs_version is match("*.x")
+    - not node_installed.changed
 
 - name: Install from deb (if choosing a specific version)
   apt:
     deb: "/opt/nodejs.deb"
   when:
-    - not nodejs_version is match("*.x")
+    - not node_installed.changed

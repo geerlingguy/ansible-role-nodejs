@@ -42,6 +42,7 @@
     name: "nodejs-{{ nodejs_version|regex_replace('x', '') }}*"
     state: present
     enablerepo: 'nodesource'
+    register: node_installed
   when:
     - not nodejs_rpm_url_prefix
 
@@ -50,10 +51,10 @@
     url: "{{ nodejs_deb_url_prefix }}/nodejs-{{ nodejs_version }}-1nodesource.x86_64.rpm"
     dest: "/opt/nodejs.rpm"
   when:
-    - not nodejs_version is match("*.x")
+    - not node_installed.changed
 
 - name: Install from rpm (if choosing a specific version)
   yum:
     name: "/opt/nodejs.rpm"
   when:
-    - not nodejs_version is match("*.x")
+    - not node_installed.changed
