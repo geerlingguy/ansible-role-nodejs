@@ -1,13 +1,13 @@
 ---
 - name: Set up the Nodesource RPM directory for Node.js > 0.10.
   set_fact:
-    nodejs_rhel_rpm_dir: "pub_{{ nodejs_version }}"
-  when: nodejs_version != '0.10'
+    nodejs_rhel_rpm_dir: "pub_{{ nodejs_repo_version }}"
+  when: nodejs_repo_version != '0.10'
 
 - name: Set up the Nodesource RPM variable for Node.js == 0.10.
   set_fact:
     nodejs_rhel_rpm_dir: "pub"
-  when: nodejs_version == '0.10'
+  when: nodejs_repo_version == '0.10'
 
 - name: Import Nodesource RPM key (CentOS < 7).
   rpm_key:
