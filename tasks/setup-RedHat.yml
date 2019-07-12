@@ -47,7 +47,6 @@
 
 - name: Download rpm (if choosing an older version)
   get_url:
-    url: 
     url: "{{ nodejs_deb_url_prefix }}/nodejs-{{ nodejs_version }}-1nodesource.x86_64.rpm"
     dest: "/opt/nodejs.rpm"
   when:

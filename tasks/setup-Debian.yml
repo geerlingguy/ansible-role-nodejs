@@ -25,7 +25,7 @@
   tags: ['skip_ansible_lint']
 
 - name: Ensure Node.js and npm are installed, from the repo, latest major version
-  apt: 
+  apt:
     name: "nodejs={{ nodejs_version|regex_replace('x', '') }}*"
     state: present
   when:
