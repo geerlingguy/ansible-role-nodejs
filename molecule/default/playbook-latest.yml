@@ -5,6 +5,9 @@
 
   vars:
     nodejs_version: "12.x"
+    nodejs_repo_version: "12.x"
+    nodejs_deb_url_prefix: ""
+    nodejs_rpm_url_prefix: ""
     nodejs_install_npm_user: root
     npm_config_prefix: /root/.npm-global
     npm_config_unsafe_perm: "true"
