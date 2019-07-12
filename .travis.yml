@@ -1,5 +1,6 @@
 ---
 language: python
+python: "2.7.15"
 services: docker
 
 env:
@@ -17,6 +18,7 @@ env:
 
 install:
   # Install test dependencies.
+  - pip install --upgrade ansible
   - pip install molecule docker
 
 before_script:
