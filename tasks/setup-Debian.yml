@@ -34,13 +34,13 @@
 
 - name: Download deb (if choosing a specific version)
   get_url:
-    url: "{{ nodejs_deb_url_prefix }}/nodejs_{{ nodejs_version }}-1nodesource1_amd64.deb"
+    url: "https://{{ nodejs_deb_url_prefix }}/nodejs_{{ nodejs_version }}-1nodesource1_amd64.deb"
     dest: "/opt/nodejs.deb"
   when:
-    - not node_installed.changed
+    - nodejs_deb_url_prefix
 
 - name: Install from deb (if choosing a specific version)
   apt:
     deb: "/opt/nodejs.deb"
   when:
-    - not node_installed.changed
+    - nodejs_deb_url_prefix
