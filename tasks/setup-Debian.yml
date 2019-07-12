@@ -36,10 +36,10 @@
     url: "{{ nodejs_deb_url_prefix }}/nodejs_{{ nodejs_version }}-1nodesource1_amd64.deb"
     dest: "/opt/nodejs.deb"
   when:
-    - nodejs_deb_url_prefix
+    - nodejs_version is not match("*.x")
 
 - name: Install from deb (if choosing a specific version)
   apt:
     deb: "/opt/nodejs.deb"
   when:
-    - nodejs_deb_url_prefix
+    - nodejs_version is not match("*.x")

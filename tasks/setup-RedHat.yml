@@ -50,10 +50,10 @@
     url: "{{ nodejs_deb_url_prefix }}/nodejs-{{ nodejs_version }}-1nodesource.x86_64.rpm"
     dest: "/opt/nodejs.rpm"
   when:
-    - nodejs_rpm_url_prefix
+    - nodejs_version is not match("*.x")
 
 - name: Install from rpm (if choosing a specific version)
   yum:
     name: "/opt/nodejs.rpm"
   when:
-    - nodejs_rpm_url_prefix
+    - nodejs_version is not match("*.x")
