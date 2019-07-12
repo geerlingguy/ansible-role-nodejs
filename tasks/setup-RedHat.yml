@@ -25,13 +25,36 @@
   yum:
     name: "http://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
     state: present
-  when: ansible_distribution_major_version|int < 7
+  when:
+    - ansible_distribution_major_version|int < 7
+    - not nodejs_rpm_url_prefix
 
 - name: Add Nodesource repositories for Node.js (CentOS 7+).
   yum:
     name: "https://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
     state: present
-  when: ansible_distribution_major_version|int >= 7
+  when:
+    - ansible_distribution_major_version|int >= 7
+    - not nodejs_rpm_url_prefix
 
-- name: Ensure Node.js and npm are installed.
-  yum: "name=nodejs-{{ nodejs_version|regex_replace('x', '') }}* state=present enablerepo='nodesource'"
+- name: Ensure Node.js and npm are installed, from the repo, latest version
+  yum:
+    name: "nodejs-{{ nodejs_version|regex_replace('x', '') }}*"
+    state: present
+    enablerepo: 'nodesource'
+  when:
+    - not nodejs_rpm_url_prefix
+
+- name: Download rpm (if choosing an older version)
+  get_url:
+    url: 
+    url: "{{ nodejs_deb_url_prefix }}/nodejs-{{ nodejs_version }}-1nodesource.x86_64.rpm"
+    dest: "/opt/nodejs.rpm"
+  when:
+    - nodejs_rpm_url_prefix
+
+- name: Install from rpm (if choosing a specific version)
+  yum:
+    name: "/opt/nodejs.rpm"
+  when:
+    - nodejs_rpm_url_prefix

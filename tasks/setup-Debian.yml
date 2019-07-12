@@ -16,11 +16,30 @@
     - "deb https://deb.nodesource.com/node_{{ nodejs_repo_version }} {{ ansible_distribution_release }} main"
     - "deb-src https://deb.nodesource.com/node_{{ nodejs_repo_version }} {{ ansible_distribution_release }} main"
   register: node_repo
+  when:
+    - not nodejs_deb_url_prefix
 
 - name: Update apt cache if repo was added.
   apt: update_cache=yes
   when: node_repo.changed
   tags: ['skip_ansible_lint']
 
-- name: Ensure Node.js and npm are installed.
-  apt: "name=nodejs={{ nodejs_version|regex_replace('x', '') }}* state=present"
+- name: Ensure Node.js and npm are installed, from the repo, latest major version
+  apt: 
+    name: "nodejs={{ nodejs_version|regex_replace('x', '') }}*"
+    state: present
+  when:
+    - not nodejs_deb_url_prefix
+
+- name: Download deb (if choosing a specific version)
+  get_url:
+    url: "{{ nodejs_deb_url_prefix }}/nodejs_{{ nodejs_version }}-1nodesource1_amd64.deb"
+    dest: "/opt/nodejs.deb"
+  when:
+    - nodejs_deb_url_prefix
+
+- name: Install from deb (if choosing a specific version)
+  apt:
+    deb: "/opt/nodejs.deb"
+  when:
+    - nodejs_deb_url_prefix
