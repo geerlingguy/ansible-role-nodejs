@@ -18,6 +18,10 @@ Available variables are listed below, along with default values (see `defaults/m
     
     nodejs_version: "12.6.0"
     nodejs_pkg_install: "true"
+    
+    please note that CentOS 6 is not compatible with Node.js 12.x
+    https://github.com/nodejs/node/issues/14755
+    https://github.com/nodesource/distributions/issues/513
 
 The Node.js version to install. "12.x" is the default and works on most supported OSes. Other versions such as "0.12", "4.x", "5.x", "6.x", "8.x", "10.x" etc. should work on the latest versions of Debian/Ubuntu and RHEL/CentOS. 
 

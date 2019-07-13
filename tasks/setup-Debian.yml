@@ -28,7 +28,6 @@
   apt:
     name: "nodejs={{ nodejs_version|regex_replace('x', '') }}*"
     state: present
-    register: node_installed
   when:
     - not nodejs_pkg_install
 
