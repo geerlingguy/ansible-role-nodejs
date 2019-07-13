@@ -9,7 +9,7 @@ nodejs_deb_url_prefix: "https://deb.nodesource.com/node_12.x/pool/main/n/nodejs"
 nodejs_rpm_url_prefix: "https://rpm.nodesource.com/pub_12.x/el/7/x86_64/"
 # "https://rpm.nodesource.com/pub_12.x/el/7/x86_64/"
 # "https://rpm.nodesource.com/pub_10.x/el/7/x86_64/"
-nodejs_pkg_install: "false"
+nodejs_pkg_install: false
 
 # The user for whom the npm packages will be installed.
 # nodejs_install_npm_user: username

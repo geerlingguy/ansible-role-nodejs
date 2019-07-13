@@ -50,10 +50,10 @@
     url: "{{ nodejs_rpm_url_prefix }}/nodejs-{{ nodejs_version }}-1nodesource.x86_64.rpm"
     dest: "/opt/nodejs.rpm"
   when:
-    - nodejs_pkg_install | bool
+    - nodejs_pkg_install
 
 - name: Install from rpm (if choosing a specific version)
   yum:
     name: "/opt/nodejs.rpm"
   when:
-    - nodejs_pkg_install | bool
+    - nodejs_pkg_install

@@ -8,7 +8,7 @@
     nodejs_repo_version: "12.x"
     nodejs_deb_url_prefix: "https://deb.nodesource.com/node_12.x/pool/main/n/nodejs"
     nodejs_rpm_url_prefix: "https://rpm.nodesource.com/pub_12.x/el/7/x86_64"
-    nodejs_pkg_install: "true"
+    nodejs_pkg_install: true
     nodejs_install_npm_user: root
     npm_config_prefix: /root/.npm-global
     npm_config_unsafe_perm: "true"
