@@ -22,6 +22,9 @@
     - name: Update apt cache.
       apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
+    - name: Update glibc.
+      package: name=glibc
+      when: ansible_os_family == 'RedHat'
 
   roles:
     - role: geerlingguy.nodejs

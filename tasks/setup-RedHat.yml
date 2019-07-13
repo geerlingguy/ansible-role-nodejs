@@ -35,7 +35,7 @@
     state: present
   when:
     - ansible_distribution_major_version|int >= 7
-    - not nodejs_rpm_url_prefix
+    - not nodejs_pkg_install
 
 - name: Ensure Node.js and npm are installed, from the repo, latest version
   yum:
