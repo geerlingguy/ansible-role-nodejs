@@ -15,16 +15,13 @@
     nodejs_npm_global_packages:
       - node-sass
       - name: jslint
-        version: 0.12.0
+        version: 0.12.1
       - name: yo
 
   pre_tasks:
     - name: Update apt cache.
       apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
-    - name: Update glibc.
-      package: name=glibc
-      when: ansible_os_family == 'RedHat'
 
   roles:
     - role: geerlingguy.nodejs

@@ -8,13 +8,34 @@ env:
     - ROLE_NAME: nodejs
   matrix:
     - MOLECULE_DISTRO: centos7
-    - MOLECULE_DISTRO: centos6
     - MOLECULE_DISTRO: ubuntu1804
     - MOLECULE_DISTRO: ubuntu1604
     - MOLECULE_DISTRO: debian9
+    - MOLECULE_DISTRO: debian8
 
     - MOLECULE_DISTRO: centos7
-      MOLECULE_PLAYBOOK: playbook-latest.yml
+      MOLECULE_PLAYBOOK: playbook-12.x.yml
+    - MOLECULE_DISTRO: ubuntu1804
+      MOLECULE_PLAYBOOK: playbook-12.x.yml
+    - MOLECULE_DISTRO: ubuntu1604
+      MOLECULE_PLAYBOOK: playbook-12.x.yml
+    - MOLECULE_DISTRO: debian9
+      MOLECULE_PLAYBOOK: playbook-12.x.yml
+    - MOLECULE_DISTRO: debian8
+      MOLECULE_PLAYBOOK: playbook-12.x.yml
+
+    - MOLECULE_DISTRO: centos7
+      MOLECULE_PLAYBOOK: playbook-10.x.yml
+    - MOLECULE_DISTRO: centos6
+      MOLECULE_PLAYBOOK: playbook-10.x.yml
+    - MOLECULE_DISTRO: ubuntu1804
+      MOLECULE_PLAYBOOK: playbook-10.x.yml
+    - MOLECULE_DISTRO: ubuntu1604
+      MOLECULE_PLAYBOOK: playbook-10.x.yml
+    - MOLECULE_DISTRO: debian9
+      MOLECULE_PLAYBOOK: playbook-10.x.yml
+    - MOLECULE_DISTRO: debian8
+      MOLECULE_PLAYBOOK: playbook-10.x.yml
 
 install:
   # Install test dependencies.
