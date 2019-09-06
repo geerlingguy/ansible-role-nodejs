@@ -38,13 +38,13 @@
 
 - name: Add Nodesource repositories for Node.js (CentOS < 7).
   yum:
-    name: "http://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ redhat_distribution }}/{{ ansible_architecture }}/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
+    name: "http://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ redhat_distribution }}/{{ ansible_architecture }}/nodesource-release-el{{ redhat_distribution }}-1.noarch.rpm"
     state: present
   when: redhat_distribution|int < 7
 
 - name: Add Nodesource repositories for Node.js (CentOS 7+).
   yum:
-    name: "https://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ redhat_distribution }}/{{ ansible_architecture }}/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
+    name: "https://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ redhat_distribution }}/{{ ansible_architecture }}/nodesource-release-el{{ redhat_distribution }}-1.noarch.rpm"
     state: present
   when: redhat_distribution|int >= 7
 
