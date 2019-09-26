@@ -21,15 +21,25 @@
     state: present
   when: ansible_distribution_major_version|int >= 7
 
+- name: Set major distro version to 7 if we're on Amazon Linux, which detects as RedHat family
+  set_fact:
+    nodejs_os_version: 7
+  when: ansible_distribution == 'Amazon'
+
+- name: Set major distro version to 'real' version if we're not on Amazon Linux
+  set_fact:
+    nodejs_os_version: ansible_distribution_major_version
+  when: ansible_distribution != 'Amazon'
+
 - name: Add Nodesource repositories for Node.js (CentOS < 7).
   yum:
-    name: "http://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
+    name: "http://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ nodejs_os_version }}/{{ ansible_architecture }}/nodesource-release-el{{ nodejs_os_version }}-1.noarch.rpm"
     state: present
   when: ansible_distribution_major_version|int < 7
 
 - name: Add Nodesource repositories for Node.js (CentOS 7+).
   yum:
-    name: "https://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
+    name: "https://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ nodejs_os_version }}/{{ ansible_architecture }}/nodesource-release-el{{ nodejs_os_version }}-1.noarch.rpm"
     state: present
   when: ansible_distribution_major_version|int >= 7
 
