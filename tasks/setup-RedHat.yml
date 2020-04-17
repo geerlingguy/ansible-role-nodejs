@@ -20,12 +20,19 @@
     name: "http://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
     state: present
   when: ansible_distribution_major_version|int < 7
+  register: node_repo
 
 - name: Add Nodesource repositories for Node.js (CentOS 7+).
   yum:
     name: "https://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
     state: present
   when: ansible_distribution_major_version|int >= 7
+  register: node_repo
+
+- name: Update package cache if repo was added.
+  yum: update_cache=yes
+  when: node_repo.changed
+  tags: ['skip_ansible_lint']
 
 - name: Ensure Node.js AppStream module is disabled (CentOS 8+).
   command: yum module disable -y nodejs
