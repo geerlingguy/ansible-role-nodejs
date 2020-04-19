@@ -1,10 +1,15 @@
 ---
 - name: Ensure dependencies are present.
   apt:
-    name:
-      - apt-transport-https
-      - gnupg2
+    name: gnupg2
     state: present
+
+- name: Ensure apt can transport via https
+  apt:
+    name: apt-transport-https
+    state: present
+  when: ansible_distribution == 'Debian' and ansible_distribution_major_version|int < 10 or
+        ansible_distribution == 'Ubuntu' and ansible_distribution_major_version|int < 18
 
 - name: Add Nodesource apt key.
   apt_key:
