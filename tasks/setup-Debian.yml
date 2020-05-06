@@ -1,5 +1,6 @@
 ---
 - name: Ensure dependencies are present.
+  become: yes
   apt:
     name:
       - apt-transport-https
@@ -7,12 +8,14 @@
     state: present
 
 - name: Add Nodesource apt key.
+  become: yes
   apt_key:
     url: https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
     id: "68576280"
     state: present
 
 - name: Add NodeSource repositories for Node.js.
+  become: yes
   apt_repository:
     repo: "{{ item }}"
     state: present
@@ -22,11 +25,13 @@
   register: node_repo
 
 - name: Update apt cache if repo was added.
+  become: yes
   apt: update_cache=yes
   when: node_repo.changed
   tags: ['skip_ansible_lint']
 
 - name: Ensure Node.js and npm are installed.
+  become: yes
   apt:
     name: "nodejs={{ nodejs_version|regex_replace('x', '') }}*"
     state: present

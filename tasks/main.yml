@@ -11,6 +11,7 @@
   when: nodejs_install_npm_user is not defined
 
 - name: Create npm global directory
+  become: yes
   file:
     path: "{{ npm_config_prefix }}"
     owner: "{{ nodejs_install_npm_user }}"
@@ -18,6 +19,7 @@
     state: directory
 
 - name: Add npm_config_prefix bin directory to global $PATH.
+  become: yes
   template:
     src: npm.sh.j2
     dest: /etc/profile.d/npm.sh
