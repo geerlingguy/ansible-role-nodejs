@@ -21,6 +21,7 @@ galaxy_info:
         - trusty
         - xenial
         - bionic
+        - focal
   galaxy_tags:
     - development
     - web
