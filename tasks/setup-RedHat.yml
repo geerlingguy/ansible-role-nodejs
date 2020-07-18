@@ -1,31 +1,28 @@
 ---
+- name: Detect Fedora
+  set_fact:
+      on_fedora: "{{ true if ansible_distribution == 'Fedora' else false }}"
+
 - name: Set up the Nodesource RPM directory.
   set_fact:
     nodejs_rhel_rpm_dir: "pub_{{ nodejs_version }}"
 
-- name: Import Nodesource RPM key (CentOS < 7).
+- name: Import Nodesource RPM key.
   rpm_key:
     key: http://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL
     state: present
-  when: ansible_distribution_major_version|int < 7
 
-- name: Import Nodesource RPM key (CentOS 7+).
-  rpm_key:
-    key: https://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL
-    state: present
-  when: ansible_distribution_major_version|int >= 7
-
-- name: Add Nodesource repositories for Node.js (CentOS < 7).
+- name: Add Nodesource repositories for Node.js (CentOS).
   yum:
     name: "http://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
     state: present
-  when: ansible_distribution_major_version|int < 7
+  when: not on_fedora
 
-- name: Add Nodesource repositories for Node.js (CentOS 7+).
+- name: Add Nodesource repositories for Node.js (Fedora).
   yum:
-    name: "https://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
+    name: "https://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/fc/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-fc{{ ansible_distribution_major_version }}-1.noarch.rpm"
     state: present
-  when: ansible_distribution_major_version|int >= 7
+  when: on_fedora
 
 - name: Ensure Node.js AppStream module is disabled (CentOS 8+).
   command: yum module disable -y nodejs
@@ -33,7 +30,7 @@
     warn: false
   register: module_disable
   changed_when: "'Nothing to do.' not in module_disable.stdout"
-  when: ansible_distribution_major_version|int >= 8
+  when: (not on_fedora and ansible_distribution_major_version|int >= 8) or (on_fedora and ansible_distribution_major_version|int >= ???)
 
 - name: Ensure Node.js and npm are installed.
   yum:
