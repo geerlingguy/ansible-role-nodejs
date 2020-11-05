@@ -27,13 +27,25 @@
     state: present
   when: ansible_distribution_major_version|int >= 7
 
-- name: Ensure Node.js AppStream module is disabled (CentOS 8+).
-  command: yum module disable -y nodejs
+- name: Ensure Node.js 10 AppStream module is disabled (CentOS 8+).
+  command: yum module disable -y nodejs:10
   args:
     warn: false
   register: module_disable
   changed_when: "'Nothing to do.' not in module_disable.stdout"
-  when: ansible_distribution_major_version|int >= 8
+  when:
+    - ansible_distribution_major_version|int >= 8
+    - nodejs_version != "10.x"
+
+- name: Ensure Node.js 12 AppStream module is enabled (CentOS 8+).
+  command: yum module enable -y nodejs:12
+  args:
+    warn: false
+  register: module_disable
+  changed_when: "'Nothing to do.' not in module_disable.stdout"
+  when:
+    - ansible_distribution_major_version|int >= 8
+    - nodejs_version == "12.x"
 
 - name: Ensure Node.js and npm are installed.
   yum:
