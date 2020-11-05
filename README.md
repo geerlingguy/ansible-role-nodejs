@@ -40,11 +40,14 @@ A list of npm packages with a `name` and (optional) `version` to be installed gl
       - name: node-sass
       # This shorthand syntax also works (same as previous example).
       - node-sass
-<!-- code block separator -->
+
+Set a path pointing to a particular `package.json` (e.g. `"/var/www/app/package.json"`). This will install all of the defined packages globally using Ansible's `npm` module.
 
     nodejs_package_json_path: ""
 
-Set a path pointing to a particular `package.json` (e.g. `"/var/www/app/package.json"`). This will install all of the defined packages globally using Ansible's `npm` module.
+Set to false to not install the nodejs repository
+
+    nodejs_manage_repository: true
 
 ## Dependencies
 

@@ -25,3 +25,6 @@ nodejs_npm_global_packages: []
 
 # The path of a package.json file used to install packages globally.
 nodejs_package_json_path: ""
+
+# Wether to install the nodejs repository
+nodejs_manage_repository: true

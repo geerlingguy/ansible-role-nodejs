@@ -11,6 +11,8 @@
     url: https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
     id: "68576280"
     state: present
+  when:
+    - nodejs_manage_repository
 
 - name: Add NodeSource repositories for Node.js.
   apt_repository:
@@ -20,10 +22,14 @@
     - "deb https://deb.nodesource.com/node_{{ nodejs_version }} {{ ansible_distribution_release }} main"
     - "deb-src https://deb.nodesource.com/node_{{ nodejs_version }} {{ ansible_distribution_release }} main"
   register: node_repo
+  when:
+    - nodejs_manage_repository
 
 - name: Update apt cache if repo was added.
   apt: update_cache=yes
-  when: node_repo.changed
+  when:
+    - node_repo.changed
+    - nodejs_manage_repository
   tags: ['skip_ansible_lint']
 
 - name: Ensure Node.js and npm are installed.
