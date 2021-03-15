@@ -25,3 +25,7 @@ nodejs_npm_global_packages: []
 
 # The path of a package.json file used to install packages globally.
 nodejs_package_json_path: ""
+
+# Deploy a specific template for /etc/profile.d/npm.sh who
+# apply path modification for node js user only
+apply_path_change_for_node_user_only: false

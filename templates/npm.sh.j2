@@ -1,3 +1,9 @@
-export PATH=$PATH:{{ npm_config_prefix }}/bin
-export NPM_CONFIG_PREFIX={{ npm_config_prefix }}
-export NODE_PATH=$NODE_PATH:{{ npm_config_prefix }}/lib/node_modules
+{% if apply_path_change_for_node_user_only is defined and apply_path_change_for_node_user_only is sameas true %}
+if [ "$USER" == "{{ nodejs_install_npm_user }}" ]; then
+{% endif %}
+  export PATH=$PATH:{{ npm_config_prefix }}/bin
+  export NPM_CONFIG_PREFIX={{ npm_config_prefix }}
+  export NODE_PATH=$NODE_PATH:{{ npm_config_prefix }}/lib/node_modules
+{% if apply_path_change_for_node_user_only is defined and apply_path_change_for_node_user_only is sameas true %}
+fi
+{% endif %}

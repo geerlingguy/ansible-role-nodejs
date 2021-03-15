@@ -28,6 +28,10 @@ The global installation directory. This should be writeable by the `nodejs_insta
 
 Set to true to suppress the UID/GID switching when running package scripts. If set explicitly to false, then installing as a non-root user will fail.
 
+    apply_path_change_for_node_user_only: "false"
+
+Set to `True` to limit path change to the nodejs user it avoid root (if it's not the nodejs user) to have access to npm binaries.
+
     nodejs_npm_global_packages: []
 
 A list of npm packages with a `name` and (optional) `version` to be installed globally. For example:
