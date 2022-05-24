@@ -3,6 +3,10 @@
 # Version numbers from Nodesource: https://github.com/nodesource/distributions
 nodejs_version: "14.x"
 
+# Specify exact Node.js version to install.
+When empty, role always installs latest version from repository.
+nodejs_exact_version: ""
+
 # The user for whom the npm packages will be installed.
 # nodejs_install_npm_user: username
 
