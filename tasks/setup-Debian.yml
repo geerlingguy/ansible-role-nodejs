@@ -30,10 +30,10 @@
   apt:
     name: "nodejs={{ nodejs_version|regex_replace('x', '') }}*"
     state: present
-  when: nodejs_exact_version is not defined
+  when: nodejs_exact_version == ""
 
 - name: Ensure specified version of Node.js and npm are installed.
   apt:
     name: "nodejs={{ nodejs_exact_version }}"
     state: present
-  when: nodejs_exact_version is defined
+  when: nodejs_exact_version != ""
