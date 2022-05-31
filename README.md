@@ -16,6 +16,10 @@ Available variables are listed below, along with default values (see `defaults/m
 
 The Node.js version to install. "14.x" is the default and works on most supported OSes. Other versions such as "8.x", "10.x", "13.x", etc. should work on the latest versions of Debian/Ubuntu and RHEL/CentOS.
 
+    nodejs_exact_version: "16.15.0-*"
+
+Optional, exact Node.js version to install. The `nodejs_version` is required and should be configured with this option. Without `nodejs_exact_version` role installs last available Node.js version.
+
     nodejs_install_npm_user: "{{ ansible_ssh_user }}"
 
 The user for whom the npm packages will be installed can be set here, this defaults to `ansible_user`.
