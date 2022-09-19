@@ -7,26 +7,26 @@
   rpm_key:
     key: http://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL
     state: present
-  when: ansible_distribution_major_version|int < 7
+  when: ansible_distribution_major_version | int < 7
 
 - name: Import Nodesource RPM key (CentOS 7+).
   rpm_key:
     key: https://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL
     state: present
-  when: ansible_distribution_major_version|int >= 7
+  when: ansible_distribution_major_version | int >= 7
 
 - name: Add Nodesource repositories for Node.js (CentOS < 7).
   yum:
     name: "http://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
     state: present
-  when: ansible_distribution_major_version|int < 7
+  when: ansible_distribution_major_version | int < 7
   register: node_repo
 
 - name: Add Nodesource repositories for Node.js (CentOS 7+).
   yum:
     name: "https://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
     state: present
-  when: ansible_distribution_major_version|int >= 7
+  when: ansible_distribution_major_version | int >= 7
   register: node_repo
 
 - name: Update package cache if repo was added.
@@ -40,10 +40,10 @@
     warn: false
   register: module_disable
   changed_when: "'Nothing to do.' not in module_disable.stdout"
-  when: ansible_distribution_major_version|int >= 8
+  when: ansible_distribution_major_version | int >= 8
 
 - name: Ensure Node.js and npm are installed.
   yum:
-    name: "nodejs-{{ nodejs_version|regex_replace('x', '') }}*"
+    name: "nodejs-{{ nodejs_version | regex_replace('x', '') }}*"
     state: present
     enablerepo: nodesource
