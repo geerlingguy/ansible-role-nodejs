@@ -31,7 +31,7 @@
 
 - name: Update package cache if repo was added.
   yum: update_cache=yes
-  when: node_repo.changed
+  when: node_repo is changed
   tags: ['skip_ansible_lint']
 
 - name: Ensure Node.js AppStream module is disabled (CentOS 8+).
