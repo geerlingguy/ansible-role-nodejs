@@ -22,7 +22,6 @@ nodejs_npm_global_packages: []
 #  - name: node-sass
 #  # This shorthand syntax also works (same as previous example).
 #  - node-sass
-nodejs_npm_global_packages_state: present
 
 # The path of a package.json file used to install packages globally.
 nodejs_package_json_path: ""
