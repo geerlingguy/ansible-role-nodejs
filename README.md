@@ -12,9 +12,9 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    nodejs_version: "14.x"
+    nodejs_version: "16.x"
 
-The Node.js version to install. "14.x" is the default and works on most supported OSes. Other versions such as "8.x", "10.x", "13.x", etc. should work on the latest versions of Debian/Ubuntu and RHEL/CentOS.
+The Node.js version to install. "14.x" is the default and works on most supported OSes. Other versions such as "10.x", "14.x", "18.x", etc. should work on the latest versions of Debian/Ubuntu and RHEL/CentOS.
 
     nodejs_install_npm_user: "{{ ansible_ssh_user }}"
 

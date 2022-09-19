@@ -43,14 +43,12 @@ jobs:
         include:
           - distro: rockylinux8
             playbook: converge.yml
-          - distro: centos7
+          - distro: ubuntu2204
             playbook: converge.yml
-          - distro: ubuntu2004
-            playbook: converge.yml
-          - distro: debian10
+          - distro: debian11
             playbook: converge.yml
 
-          - distro: debian10
+          - distro: debian11
             playbook: playbook-latest.yml
 
     steps:
