@@ -44,6 +44,6 @@
 
 - name: Ensure Node.js and npm are installed.
   yum:
-    name: "nodejs-{{ nodejs_version | regex_replace('x', '') }}*"
+    name: "nodejs-{{ nodejs_exact_version|default(nodejs_version|regex_replace('x', '')+'*') }}"
     state: present
     enablerepo: nodesource
