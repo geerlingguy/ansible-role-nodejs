@@ -1,19 +1,19 @@
 ---
 - name: Ensure dependencies are present.
-  apt:
+  ansible.builtin.apt:
     name:
       - apt-transport-https
       - gnupg2
     state: present
 
 - name: Add Nodesource apt key.
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
     id: "68576280"
     state: present
 
 - name: Add NodeSource repositories for Node.js.
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "{{ item }}"
     state: present
   with_items:
@@ -22,11 +22,11 @@
   register: node_repo
 
 - name: Update apt cache if repo was added.
-  apt: update_cache=yes
+  ansible.builtin.apt: update_cache=yes
   when: node_repo is changed
   tags: ['skip_ansible_lint']
 
 - name: Ensure Node.js and npm are installed.
-  apt:
+  ansible.builtin.apt:
     name: "nodejs={{ nodejs_version | regex_replace('x', '') }}*"
     state: present
