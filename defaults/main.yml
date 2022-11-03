@@ -3,6 +3,9 @@
 # Version numbers from Nodesource: https://github.com/nodesource/distributions
 nodejs_version: "16.x"
 
+# The Node.js repository to use for installation.
+nodejs_repourl: "https://deb.nodesource.com"
+
 # The user for whom the npm packages will be installed.
 # nodejs_install_npm_user: username
 

@@ -19,8 +19,8 @@
     filename: "node_{{ nodejs_version }}"
     update_cache: no
   with_items:
-    - "deb https://deb.nodesource.com/node_{{ nodejs_version }} {{ ansible_distribution_release }} main"
-    - "deb-src https://deb.nodesource.com/node_{{ nodejs_version }} {{ ansible_distribution_release }} main"
+    - "deb {{ nodejs_repourl }}/node_{{ nodejs_version }} {{ ansible_distribution_release }} main"
+    - "deb-src {{ nodejs_repourl }}/node_{{ nodejs_version }} {{ ansible_distribution_release }} main"
   register: node_repo
 
 - name: Update apt cache if repo was added.
