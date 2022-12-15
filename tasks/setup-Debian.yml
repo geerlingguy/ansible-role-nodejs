@@ -11,6 +11,7 @@
     url: https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
     id: "68576280"
     state: present
+  when: ansible_distribution_major_version | int < 22
 
 - name: Add NodeSource repositories for Node.js.
   apt_repository:
@@ -20,6 +21,31 @@
     - "deb https://deb.nodesource.com/node_{{ nodejs_version }} {{ ansible_distribution_release }} main"
     - "deb-src https://deb.nodesource.com/node_{{ nodejs_version }} {{ ansible_distribution_release }} main"
   register: node_repo
+  when: ansible_distribution_major_version | int < 22
+
+- name: Remove legacy apt key
+  apt_key:
+    id: "68576280"
+    state: absent
+  when: ansible_distribution_major_version | int >= 22
+
+- name: Add Nodesource apt key
+  get_url:
+    url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+    dest: /etc/apt/trusted.gpg.d/nodesource.asc
+    checksum: sha1:015b8603bfa93149bba61bee4f5130e9f3f2c0f5
+    mode: 0644
+  when: ansible_distribution_major_version | int >= 22
+
+- name: Add NodeSource repositories for Node.js.
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  with_items:
+    - "deb [signed-by=/etc/apt/trusted.gpg.d/nodesource.asc] https://deb.nodesource.com/node_{{ nodejs_version }} {{ ansible_distribution_release }} main"
+    - "deb-src [signed-by=/etc/apt/trusted.gpg.d/nodesource.asc] https://deb.nodesource.com/node_{{ nodejs_version }} {{ ansible_distribution_release }} main"
+  register: node_repo
+  when: ansible_distribution_major_version | int >= 22
 
 - name: Update apt cache if repo was added.
   apt: update_cache=yes
