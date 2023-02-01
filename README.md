@@ -25,6 +25,12 @@ nodejs_install_npm_user: "{{ ansible_ssh_user }}"
 The user for whom the npm packages will be installed can be set here, this defaults to `ansible_user`.
 
 ```yaml
+nodejs_install_npm_group: "{{ nodejs_install_npm_user }}"
+```
+
+The group that the above mentioned user is in.  Defaults to the value that `nodejs_install_npm_user` is set to.
+
+```yaml
 npm_config_prefix: "/usr/local/lib/npm"
 ```
 
