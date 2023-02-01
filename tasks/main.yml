@@ -19,7 +19,7 @@
   file:
     path: "{{ npm_config_prefix }}"
     owner: "{{ nodejs_install_npm_user }}"
-    group: "{{ nodejs_install_npm_group  }}"
+    group: "{{ nodejs_install_npm_group }}"
     state: directory
     mode: 0755
 
