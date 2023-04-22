@@ -5,6 +5,7 @@
       - apt-transport-https
       - gnupg2
     state: present
+    update_cache: yes
 
 - name: Add Nodesource apt key.
   apt_key:
