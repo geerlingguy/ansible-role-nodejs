@@ -7,25 +7,17 @@
       - gnupg2
     state: present
 
-- name: Download NodeSource's signing key.
-  # NodeSource's web server discriminates the User-Agent used by the deb822_repository module.
-  # https://github.com/nodesource/distributions/issues/1723
-  ansible.builtin.get_url:
-    url: https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key
-    dest: /etc/apt/signing-key-nodesource-repo.asc
-    owner: root
-    group: root
-    mode: '0444'
-  register: node_signing_key
+# Workaround to fix 
+# https://github.com/geerlingguy/ansible-role-nodejs/issues/160
+# Solution: https://kyle.pericak.com/nodejs-ansible.html
+- name: "Add nodejs apt key"
+  apt_key:
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    state: present
 
-- name: Add NodeSource repositories for Node.js.
-  ansible.builtin.deb822_repository:
-    name: nodesource_{{ nodejs_version }}
-    uris: "https://deb.nodesource.com/node_{{ nodejs_version }}"
-    types: deb
-    suites: nodistro
-    components: main
-    signed_by: "{{ node_signing_key.dest }}"
+- name: "Add nodejs {{ nodejs_version }} ppa for apt repo"
+  apt_repository:
+    repo: "deb https://deb.nodesource.com/node_{{ nodejs_version }} {{ ansible_distribution_release }} main"
     state: present
   register: node_repo
 
