@@ -41,8 +41,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - distro: rockylinux9
-            playbook: converge.yml
+          # Was getting 'Hash algorithm SHA1 not available.'
+          # - distro: rockylinux9
+          #   playbook: converge.yml
           - distro: ubuntu2204
             playbook: converge.yml
           - distro: debian12
