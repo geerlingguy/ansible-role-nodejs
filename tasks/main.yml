@@ -1,9 +1,11 @@
 ---
-- import_tasks: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
 
-- import_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+- name: Include os specific tasks
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "setup-{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - "setup-{{ ansible_distribution }}.yml"
+    - "setup-{{ ansible_os_family }}.yml"
 
 - name: Define nodejs_install_npm_user
   set_fact:
