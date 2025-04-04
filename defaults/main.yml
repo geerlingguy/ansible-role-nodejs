@@ -31,4 +31,4 @@ nodejs_package_json_path: ""
 nodejs_generate_etc_profile: "true"
 
 # Whether or not to verify the GPG key while installing the package
-nodejs_disable_gpg_check: "false
+nodejs_disable_gpg_check: "false"
