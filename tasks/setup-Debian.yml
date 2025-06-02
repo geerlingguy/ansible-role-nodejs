@@ -15,8 +15,23 @@
     dest: /etc/apt/signing-key-nodesource-repo.asc
     owner: root
     group: root
-    mode: '0444'
+    mode: "0444"
   register: node_signing_key
+
+- name: Set architecture for NodeSource repository
+  ansible.builtin.set_fact:
+    nodejs_repo_arch: "{{ nodejs_architecture | default('') }}"
+  when: nodejs_architecture is defined and nodejs_architecture != ""
+
+- name: Set architecture for NodeSource repository based on ansible_architecture
+  ansible.builtin.set_fact:
+    nodejs_repo_arch: >-
+      {% if ansible_architecture == 'x86_64' %}amd64
+      {% elif ansible_architecture == 'i386' %}i386
+      {% elif ansible_architecture == 'aarch64' %}arm64
+      {% elif ansible_architecture == 'armv7l' %}armhf
+      {% else %}{{ ansible_architecture }}{% endif %}
+  when: nodejs_architecture is not defined or nodejs_architecture == ""
 
 - name: Add NodeSource repositories for Node.js.
   ansible.builtin.deb822_repository:
@@ -26,13 +41,14 @@
     suites: nodistro
     components: main
     signed_by: "{{ node_signing_key.dest }}"
+    architectures: "{{ nodejs_repo_arch }}"
     state: present
   register: node_repo
 
 - name: Update apt cache if repo was added.
   ansible.builtin.apt: update_cache=yes
   when: node_repo is changed
-  tags: ['skip_ansible_lint']
+  tags: ["skip_ansible_lint"]
 
 - name: Ensure Node.js and npm are installed.
   ansible.builtin.apt:
