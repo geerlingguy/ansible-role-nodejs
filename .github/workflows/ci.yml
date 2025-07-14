@@ -19,12 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: 'geerlingguy.nodejs'
 
       - name: Set up Python 3.
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
@@ -41,24 +41,27 @@ jobs:
     strategy:
       matrix:
         include:
-          - distro: rockylinux8
-            playbook: converge.yml
+          # Was getting 'Hash algorithm SHA1 not available.'
+          # - distro: rockylinux9
+          #   playbook: converge.yml
           - distro: ubuntu2204
+            playbook: converge.yml
+          - distro: debian12
             playbook: converge.yml
           - distro: debian11
             playbook: converge.yml
 
-          - distro: debian11
+          - distro: debian12
             playbook: playbook-latest.yml
 
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: 'geerlingguy.nodejs'
 
       - name: Set up Python 3.
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
