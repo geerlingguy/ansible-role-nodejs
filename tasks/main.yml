@@ -23,7 +23,7 @@
     src: npm.sh.j2
     dest: /etc/profile.d/npm.sh
     mode: 0644
-  when: nodejs_generate_etc_profile
+  when: (nodejs_generate_etc_profile is defined) and (nodejs_generate_etc_profile|length > 0)
 
 - name: Ensure npm global packages are installed.
   npm:
@@ -40,4 +40,5 @@
 - name: Install packages defined in a given package.json.
   npm:
     path: "{{ nodejs_package_json_path }}"
-  when: nodejs_package_json_path is defined and nodejs_package_json_path
+  when: (nodejs_package_json_path is defined) and (nodejs_package_json_path|length > 0)
+  
