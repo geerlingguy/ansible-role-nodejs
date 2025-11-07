@@ -11,7 +11,7 @@ npm_config_prefix: "/usr/local/lib/npm"
 
 # Set to true to suppress the UID/GID switching when running package scripts. If
 # set explicitly to false, then installing as a non-root user will fail.
-npm_config_unsafe_perm: "false"
+npm_config_unsafe_perm: false
 
 # Define a list of global packages to be installed with NPM.
 nodejs_npm_global_packages: []
@@ -28,4 +28,4 @@ nodejs_package_json_path: ""
 
 # Whether or not /etc/profile.d/npm.sh (globa) must be generated.
 # Set to false if you need to handle this manually with a per-user install.
-nodejs_generate_etc_profile: "true"
+nodejs_generate_etc_profile: true

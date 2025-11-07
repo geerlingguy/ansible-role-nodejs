@@ -40,4 +40,4 @@
 - name: Install packages defined in a given package.json.
   npm:
     path: "{{ nodejs_package_json_path }}"
-  when: nodejs_package_json_path is defined and nodejs_package_json_path
+  when: nodejs_package_json_path is defined and nodejs_package_json_path | bool
