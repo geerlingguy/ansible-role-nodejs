@@ -29,3 +29,7 @@ nodejs_package_json_path: ""
 # Whether or not /etc/profile.d/npm.sh (globa) must be generated.
 # Set to false if you need to handle this manually with a per-user install.
 nodejs_generate_etc_profile: "true"
+
+# Architecture for the NodeSource repository (amd64, i386, etc.)
+# Leave empty to auto-detect architecture from ansible_architecture
+nodejs_architecture: ""

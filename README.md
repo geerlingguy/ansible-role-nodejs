@@ -65,8 +65,15 @@ Set a path pointing to a particular `package.json` (e.g. `"/var/www/app/package.
 ```yaml
 nodejs_generate_etc_profile: "true"
 ```
-    
+
 By default the role will create `/etc/profile.d/npm.sh` with exported variables (`PATH`, `NPM_CONFIG_PREFIX`, `NODE_PATH`). If you prefer to avoid generating that file (e.g. you want to set the variables yourself for a non-global install), set it to "false".
+
+```yaml
+nodejs_architecture: ""
+```
+
+The architecture for the NodeSource repository (e.g., "amd64", "i386", "arm64", etc.). By default, this is empty, which means the role will automatically detect the architecture based on `ansible_architecture`. You only need to set this if you want to override the auto-detection.
+
 
 ## Dependencies
 
