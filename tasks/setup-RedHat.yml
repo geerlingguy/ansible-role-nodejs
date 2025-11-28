@@ -8,7 +8,7 @@
   yum:
     name: "https://rpm.nodesource.com/pub_{{ nodejs_version }}/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm"
     state: present
-  when: ansible_distribution_major_version | int >= 7
+  when: ansible_facts.distribution_major_version | int >= 7
   register: node_repo
 
 - name: Update package cache if repo was added.
@@ -21,7 +21,7 @@
   command: yum module disable -y nodejs
   register: module_disable
   changed_when: "'Nothing to do.' not in module_disable.stdout"
-  when: ansible_distribution_major_version | int >= 8
+  when: ansible_facts.distribution_major_version | int >= 8
 
 - name: Ensure Node.js and npm are installed.
   yum:
