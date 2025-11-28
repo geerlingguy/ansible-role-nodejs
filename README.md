@@ -63,7 +63,7 @@ nodejs_package_json_path: ""
 Set a path pointing to a particular `package.json` (e.g. `"/var/www/app/package.json"`). This will install all of the defined packages globally using Ansible's `npm` module.
 
 ```yaml
-nodejs_generate_etc_profile: "true"
+nodejs_generate_etc_profile: true
 ```
     
 By default the role will create `/etc/profile.d/npm.sh` with exported variables (`PATH`, `NPM_CONFIG_PREFIX`, `NODE_PATH`). If you prefer to avoid generating that file (e.g. you want to set the variables yourself for a non-global install), set it to "false".
