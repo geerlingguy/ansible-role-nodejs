@@ -2,8 +2,8 @@
 - name: Add Nodesource repository for Node.js.
   ansible.builtin.yum_repository:
     name: nodesource
-    description: "Node.js Packages for Linux RPM based distros - {{ ansible_architecture }}"
-    baseurl: "https://rpm.nodesource.com/pub_{{ nodejs_version }}/nodistro/nodejs/{{ ansible_architecture }}"
+    description: "Node.js Packages for Linux RPM based distros - {{ ansible_facts['architecture'] }}"
+    baseurl: "https://rpm.nodesource.com/pub_{{ nodejs_version }}/nodistro/nodejs/{{ ansible_facts['architecture'] }}"
     enabled: true
     gpgcheck: true
     gpgkey: https://rpm.nodesource.com/gpgkey/ns-operations-public.key
